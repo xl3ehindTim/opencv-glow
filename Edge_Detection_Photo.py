@@ -27,7 +27,7 @@ def show_images(original_image, edge_image):
     plt.show()
 
 def main():
-    image_path = './src/Images/TestImage2.0.png'  # Replace with your image path
+    image_path = './test/Images/TestImage2.0.png'  # Replace with your image path
     edges = detect_edges(image_path)
     
     original_image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
