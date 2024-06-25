@@ -1,6 +1,6 @@
 import cv2 
   
-path = "videos/upstairs.mp4"
+path = "./videos/u1.mp4"
 
   
 def preprocess(frame):
