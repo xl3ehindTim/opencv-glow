@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 
 # Load the reference image (empty tube)
-reference_image = cv2.imread("./videos/reference_greenonpurple.jpg")
+reference_image = cv2.imread("../../videos/reference_greenonpurple.jpg")
 
 # Initialize video capture (replace 'video.mp4' with 0 to use a webcam)
-cap = cv2.VideoCapture("./videos/greenonpurple.mp4")
+cap = cv2.VideoCapture("../../videos/greenonpurple.mp4")
 
 # Check if the video file or webcam opened successfully
 if not cap.isOpened():

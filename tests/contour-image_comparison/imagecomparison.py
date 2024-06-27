@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the reference image (empty tube) and the current frame
-reference_image = cv2.imread("./videos/reference_red.png")
+reference_image = cv2.imread("../../videos/reference_red.png")
 current_frame = cv2.imread("./videos/image.png")
 
 # # Convert images to grayscale
