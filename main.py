@@ -1,46 +1,55 @@
-import cv2 
-  
-path = "videos/upstairs.mp4"
+import cv2
+import numpy as np
 
-  
-def preprocess(frame):
-    """
-    Preprocess frame with grayscale and blur
-    """
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
-    return blur
+# Load the reference image (empty tube)
+reference_image = cv2.imread("./videos/reference_greenonpurple.jpg")
 
+# Initialize video capture (replace 'video.mp4' with 0 to use a webcam)
+cap = cv2.VideoCapture("./videos/greenonpurple.mp4")
 
-def capture_video(path: str):
-    """
-    Capture video into opencv
-    """
-    return cv2.VideoCapture(path)
+# Check if the video file or webcam opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
 
+while True:
+    # Capture frame-by-frame
+    ret, current_frame = cap.read()
 
-cap = capture_video(path)
-
-# initializing subtractor  
-fgbg = cv2.bgsegm.createBackgroundSubtractorMOG() 
-
-
-while(1): 
-    ret, frame = cap.read()
-   
-    cv2.imshow('Original Video', frame)
-
-    # Optional preprocessing
-    # frame = preprocess(frame)
-
-    # applying on each frame 
-    fgmask = fgbg.apply(frame) 
-  
-    # cv2.imshow('Foreground Mask', fgmask)
-    cv2.imshow('frame', fgmask)   
-    k = cv2.waitKey(30) & 0xff
-    if k == 27: 
+    # If frame is read correctly, ret is True
+    if not ret:
+        print("End of video stream or error.")
         break
-  
-cap.release() 
-cv2.destroyAllWindows() 
+
+    # gray_ref = cv2.cvtColor(reference_image, cv2.COLOR_BGR2GRAY)
+    # gray_frame = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
+
+    # Background subtraction
+    diff = cv2.absdiff(reference_image, current_frame)
+
+    # Thresholding
+    _, thresh = cv2.threshold(diff, 13, 255, cv2.THRESH_BINARY)
+
+    # Smoothing
+    blurred = cv2.GaussianBlur(thresh, (5, 5), 0)
+
+    # Edge detection
+    edges = cv2.Canny(blurred, 50, 150)
+
+    # Find contours
+    contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Draw contours on the original frame
+    output_frame = current_frame.copy()
+    cv2.drawContours(output_frame, contours, -1, (0, 255, 0), 3)
+
+    # Display the result
+    cv2.imshow('Detected Hand', output_frame)
+
+    # Break the loop if 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the video capture object and close all OpenCV windows
+cap.release()
+cv2.destroyAllWindows()
