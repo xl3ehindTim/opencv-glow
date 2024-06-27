@@ -3,7 +3,7 @@ Background substractor MOG2 test
 """
 import cv2 
   
-cap = cv2.VideoCapture("./videos/greenonpurple.mp4")
+cap = cv2.VideoCapture("../videos/greenonpurple.mp4")
 fgbg = cv2.createBackgroundSubtractorMOG2() 
   
   

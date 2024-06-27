@@ -46,5 +46,5 @@ def detect_light_video(video_path, threshold=127):
   cap.release()
   cv2.destroyAllWindows()
 
-video_path = "./videos/greenonpurple.mp4"
+video_path = "../videos/greenonpurple.mp4"
 detect_light_video(video_path)
