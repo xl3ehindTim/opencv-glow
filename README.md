@@ -17,3 +17,9 @@ This project relies on the following dependencies:
 pip install -r requirements.txt
 python main.py
 ```
+
+## Contributors
+
+<a href = "https://github.com/xl3ehindTim/opencv-glow/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=xl3ehindTim/opencv-glow"/>
+</a>
