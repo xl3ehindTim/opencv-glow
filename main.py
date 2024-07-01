@@ -1,8 +1,4 @@
 import cv2
-import numpy as np
-
-# Load the reference image (empty tube)
-reference_image = cv2.imread("./videos/reference_greenonpurple.jpg")
 
 # Initialize video capture (replace 'video.mp4' with 0 to use a webcam)
 cap = cv2.VideoCapture("./videos/greenonpurple.mp4")
@@ -12,6 +8,9 @@ if not cap.isOpened():
     print("Error: Could not open video.")
     exit()
 
+# Capture the first frame as the reference image
+ret, reference_image = cap.read()
+
 while True:
     # Capture frame-by-frame
     ret, current_frame = cap.read()
@@ -20,9 +19,6 @@ while True:
     if not ret:
         print("End of video stream or error.")
         break
-
-    # gray_ref = cv2.cvtColor(reference_image, cv2.COLOR_BGR2GRAY)
-    # gray_frame = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
 
     # Background subtraction
     diff = cv2.absdiff(reference_image, current_frame)
