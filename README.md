@@ -6,6 +6,8 @@ This project utilizes OpenCV libraries to implement hand detection algorithms fo
 
 ![touch-detection](https://github.com/xl3ehindTim/opencv-glow/assets/32740573/1fb9f87e-4d2e-4527-8aa4-766e43b05266)
 
+This is a sidetrack to explore the possibilities of using computer vision in our GLOW project. If you are interested in the main codebase explore [this repository](https://github.com/xl3ehindTim/glow-2024).
+
 ## Dependencies
 This project relies on the following dependencies:
 - OpenCV ([https://opencv.org/](https://opencv.org/))
